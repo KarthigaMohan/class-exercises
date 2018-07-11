@@ -1,0 +1,70 @@
+The classes which implement the List interface are called as Lists. ArrayList, Vector and LinkedList are some examples of lists.
+
+Elements can be inserted at a specific position using integer index. Any pre-existing elements at or beyond that position are shifted right.
+
+A list may contain duplicate elements.
+A list may contain multiple null elements.
+
+Functions: 
+	get(), set(), remove(), add(), indexOf(), lastIndexOf(), sublist(fromIndex, toIndex)
+
+
+
+
+
+
+Array Lists
+
+
+
+Size of the ArrayList is not fixed. ArrayList can grow and shrink dynamically.
+
+ArrayList class has methods to perform 
+	solo modifications ( add(), remove()… )
+	bulk modifications ( addAll(), removeAll(), retainAll()… ) 	
+	searching( indexOf(), lasIndexOf() )
+	iterations( iterator() ).
+
+Default initial capacity of an ArrayList is 10.
+
+Can synchronize ArrayList by using Collections.synchronizedList() method. 
+
+3 methods to loop: Iterator, for Loop, for Each loop
+
+Arrays.asList() method can be used to create a fixed-size arraylist from an array.
+
+
+
+
+
+
+
+Linked Lists
+
+LinkedList is a data structure where each element consist of three things. First one is the reference to previous element, second one is the actual value of the element and last one is the reference to next element.
+
+
+The LinkedList class in Java is an implementation of doubly linked list which can be used both as a List as well as Queue. The LinkedList in java can have any type of elements including null and duplicates. Elements can be inserted and can be removed from both the ends and can be retrieved from any arbitrary position.
+
+Functions used:
+	add(), offer(), addFirst(), addLast(), offerFirst(), offerLast()
+	remove(), poll()
+	element(),peek()
+
+
+
+
+
+
+Differences between Array Lists and Linked Lists
+
+Insertion and removal operations in LinkedList are faster than the ArrayList. Because in LinkedList, there is no need to shift the elements after each insertion and removal. only references of next and previous elements need to be changed.
+
+Retrieval of the elements is very slow in LinkedList as compared to ArrayList. Becaues in LinkedList, you have to traverse from beginning or end (whichever is closer to the element) to reach the element.
+
+LL: More memory, no random access, nodes;        AL: less memory, random access, elements
+
+
+
+
+
