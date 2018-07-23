@@ -1,9 +1,14 @@
+Janani Maam Questions:
 
 Why is Java called platform independent?
 Can overloading occur when return type alone is changed?
 Why Java does not support multiple inheritance?
 Tell about classes in String Buffer and String Builder. 
 
+
+
+
+Morgan Questions: 
 
 Explain about abstraction, polymorphism. 
 Can parameterized constructor be used in abstract class?
@@ -17,6 +22,9 @@ Difference between hash map and linked hash map.
 Why do we use start() to call run()?
 
 
+
+
+Muthu Sir Questions:
 
 How is throws() executed?  (JVM handles)
 Number and types of primitive data types. (8)
