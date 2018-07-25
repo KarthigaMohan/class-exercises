@@ -65,5 +65,75 @@ The SQL LEFT JOIN returns all rows from the left table, even if there are no mat
 
 
 
-8. 
+8. In database: describe the 1NF, 2NF and 3NF. 
+1NF (First Normal Form) Rules
+    Rule 1-Each table cell should contain a single value.
+    Rule 2-Each record needs to be unique.
 
+2NF (Second Normal Form) Rules 
+    Rule 1- Be in 1NF
+    Rule 2- Single Column Primary Key
+
+3NF (Third Normal Form) Rules
+    Rule 1- Be in 2NF
+    Rule 2- Has no transitive functional dependencies
+
+
+9. Given a relational database, how to improve the performance of a select query involving some joins? 
+	Use inner join, instead of outer join if possible.
+		The outer join should only be used if it is necessary. Using outer join limits the database optimization options which 			typically results in slower SQL execution.
+	For SQL queries with the LEFT OUTER JOIN, pushing predicates of the right table from the WHERE clause into the ON condition helps the 			database optimizer generate a more efficient query. Predicates of the left table can stay in the WHERE clause.
+	Similarly, for the SQL queries with the RIGHT OUTER JOIN, predicates for the right table should be moved from the WHERE clause into 			the ON condition.
+
+10. Composition vs aggregation. 
+The three types of association connectors: association, aggregation and composition. 
+    Aggregation implies a relationship where the child can exist independently of the parent. Example: Class (parent) and Student (child). Delete the Class and the Students still exist.f two classes in a model need to communicate with each other, there must be link between them, and that can be represented by an association (connector). 
+    Composition implies a relationship where the child cannot exist independent of the parent. Example: House (parent) and Room (child). Rooms don't exist separate to a House. We should be more specific and use the composition link in cases where in addition to the part-of relationship between Class A and Class B - there's a strong lifecycle dependency between the two, meaning that when Class A is deleted then Class B is also deleted as a result
+
+
+11. Overloading vs Overriding. 
+1). The real object type in the run-time, not the reference variable's type, determines which overridden method is used at runtime. In contrast, reference type determines which overloaded method will be used at compile time.
+2). Polymorphism applies to overriding, not to overloading.
+3). Overriding is a run-time concept while overloading is a compile-time concept.  
+4)Method overloading is used to increase the readability of the program.	Method overriding is used to provide the specific implementation of the method that is already provided by its super class.
+5)Method overloading is performed within class.	Method overriding occurs in two classes that have IS-A (inheritance) relationship.
+6)In case of method overloading, parameter must be different.	In case of method overriding, parameter must be same.
+7)Method overloading is the example of compile time polymorphism.	Method overriding is the example of run time polymorphism.
+8)In java, method overloading can't be performed by changing return type of the method only. Return type can be same or different in method overloading. But you must have to change the parameter.	Return type must be same or covariant in method overriding.
+
+
+12. How to implement final keyword in java ?
+You are always allowed to initialize a final variable. The compiler makes sure that you can do it only once.
+Note that calling methods on an object stored in a final variable has nothing to do with the semantics of final. In other words: final is only about the reference itself, and not about the contents of the referenced object.
+
+There are three ways to initialize a final variable :
+
+    You can initialize a final variable when it is declared.This approach is the most common. A final variable is called blank final variable,if it is not initialized while declaration. Below are the two ways to initialize a blank final variable.
+    A blank final variable can be initialized inside instance-initializer block or inside constructor. If you have more than one constructor in your class then it must be initialized in all of them, otherwise compile time error will be thrown.
+    A blank final static variable can be initialized inside static block. 
+
+When a final variable is a reference to an object, then this final variable is called reference final variable.But in case of a reference final variable, internal state of the object pointed by that reference variable can be changed. Note that this is not re-assigning. This property of final is called non-transitivity. 
+
+
+
+
+
+13. Why String class is specific in Java?
+1. Requirement of String Pool
+	String pool (String intern pool) is a special storage area in Java heap. When a string is created and if the string already exists in the pool, the reference of the existing string will be returned, instead of creating a new object and returning its reference.If string is not immutable, changing the string with one reference will lead to the wrong value for the other references.
+
+2. Allow String to Cache its Hashcode
+	The hashcode of string is frequently used in Java. For example, in a HashMap. Being immutable guarantees that hashcode will always the same, so that it can be cashed without worrying the changes.That means, there is no need to calculate hashcode every time it is used. This is more efficient.
+
+3. Security
+	String is widely used as parameter for many java classes, e.g. network connection, opening files, etc. Were String not immutable, a connection or file would be changed and lead to serious security threat.
+
+
+
+
+14. Compare threads behavior in single processor-multiple core and multiple processor-single core systems?
+You can create multiple threads in your environment and have a single CPU core execute these threads. However, their execution will not be in parallel but merely concurrent. In other words, the CPU will execute one thread (in part or completely) first then the other thread. If there was work left on the first thread it then may return to the first thread again and execute some more instructions. The threads are thus progressing concurrently. If the threads were executed on more than one CPU core then they can be executed at the same time which means they are executed in parallel.
+In summary, multiple threads on a single CPU core can be executed concurrently. Multiple threads on multiple CPU cores can be executed concurrently or in parallel.
+
+
+ 
