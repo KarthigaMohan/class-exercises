@@ -131,7 +131,224 @@ When a final variable is a reference to an object, then this final variable is c
 
 
 
-14. 
+14. Compare threads behavior in single processor-multiple core and multiple processor-single core systems?
+You can create multiple threads in your environment and have a single CPU core execute these threads. However, their execution will not be in parallel but merely concurrent. In other words, the CPU will execute one thread (in part or completely) first then the other thread. If there was work left on the first thread it then may return to the first thread again and execute some more instructions. The threads are thus progressing concurrently. If the threads were executed on more than one CPU core then they can be executed at the same time which means they are executed in parallel.
+In summary, multiple threads on a single CPU core can be executed concurrently. Multiple threads on multiple CPU cores can be executed concurrently or in parallel.
 
 
+15. Compare StringBuffer and StringReader
+StringReader class is a character stream with string as a source. It takes an input string and changes it into character stream. It inherits Reader class.
+StringBuffer is a peer class of String that provides much of the functionality of strings. StringBuffer may have characters and substrings inserted in the middle or appended to the end. Some of the most used methods are: length( ) and capacity( ): The length of a StringBuffer can be found by the length( ) method, while the total allocated capacity can be found by the capacity( ) method. append( ): It is used to add text at the end of the existence text. 
+
+
+16.  Write a function to reverse a string.
+	String class does not have reverse() method, we need to convert the input string to StringBuilder, which is achieved by using the append method of StringBuilder.
+	getBytes() method is used to convert the input string into bytes[]. Then reverse the bytes elements through a loop and convert to String. 
+	Convert the input string into the character array by using toCharArray() built in method. Then, add the characters of the array into the ArrayList object. Java also has built in reverse() method for the Collections class. Since Collections class reverse() method takes a list object , to reverse the list , we will pass the LinkedList object which is a type of list of characters.
+
+
+
+17. What’s the difference between Interface and Abstract.
+Abstract class	vs  Interface
+1) Abstract class can have abstract and non-abstract methods.	Interface can have only abstract methods. Since Java 8, it can have default and static methods also.
+2) Abstract class doesn't support multiple inheritance.	Interface supports multiple inheritance.
+3) Abstract class can have final, non-final, static and non-static variables.	Interface has only static and final variables.
+4) Abstract class can provide the implementation of interface.	Interface can't provide the implementation of abstract class.
+5) The abstract keyword is used to declare abstract class.	The interface keyword is used to declare interface.
+6) An abstract classcan extend another Java class and implement multiple Java interfaces.	An interface can extend another Java interface only.
+7) An abstract classcan be extended using keyword extends.	An interface classcan be implemented using keyword implements.
+8) A Javaabstract classcan have class members like private, protected, etc.	Members of a Java interface are public by default.
+9)Example:
+public abstract class Shape{
+public abstract void draw();
+}	Example:
+public interface Drawable{
+void draw();
+}
+
+
+
+
+
+18. Write a function to reverse words in a string. 
+Convert to ArrayList after splitting and then use Collections.reverse(). 
+
+
+19. Can you assign a String to and Object? What about vice-versa?
+We can convert String to Object in java with assignment operator. Each class is internally a child class of Object class. So you can assign string to Object directly.
+We can convert Object to String in java using toString() method of Object class or String.valueOf(object) method.
+
+
+20. Explain Generics.
+The Java Generics programming is introduced in Java 5 to deal with type-safe objects. 
+Advantage of Java Generic Class:
+There are mainly 3 advantages of generics. They are as follows:
+	1) Type-safety : We can hold only a single type of objects in generics. It doesn’t allow to store other objects.
+	2) Type casting is not required: There is no need to typecast the object.
+	3)Compile-Time Checking: It is checked at compile time so problem will not occur at runtime. The good programming strategy says it is 		far better to handle the problem at compile time than runtime.
+Comparable Interface is a great example of Generics in interfaces. 
+ A generic type is a class or interface that is parameterized over types. We use angle brackets (<>) to specify the type parameter. 
+
+
+
+21. Explain Generics wildcards.
+The question mark (?) is known as the wildcard in generic programming . It represents an unknown type. The wildcard can be used in a variety of situations such as the type of a parameter, field, or local variable; sometimes as a return type. Unlike arrays, different instantiations of a generic type are not compatible with each other, not even explicitly. 
+	Upper Bounded Wildcards: These wildcards can be used when you want to relax the restrictions on a variable. For example, say you want 		to write a method that works on List < integer >, List < double >, and List < number > , you can do this  using an upper bounded 		wildcard.
+	To declare an upper-bounded wildcard, use the wildcard character (‘?’), followed by the extends keyword, followed by its upper bound.
+						public static void add(List<? extends Number> list)
+
+
+	Lower Bounded Wildcards: It is expressed using the wildcard character (‘?’), followed by the super keyword, followed by its lower 		bound: <? super A>.
+						Syntax: Collectiontype <? super A>
+				Here arguments can be Integer or superclass of Integer(which is Number). 
+
+
+22. Find the depth of a binary tree
+// A binary tree node
+class Node 
+{
+    int data;
+    Node left, right;
+  
+    Node(int item) 
+    {
+        data = item;
+        left = right = null;
+    }
+}
+  
+class BinaryTree 
+{
+     Node root;
+  
+    /* Compute the "maxDepth" of a tree -- the number of 
+       nodes along the longest path from the root node 
+       down to the farthest leaf node.*/
+    int maxDepth(Node node) 
+    {
+        if (node == null)
+            return 0;
+        else
+        {
+            /* compute the depth of each subtree */
+            int lDepth = maxDepth(node.left);
+            int rDepth = maxDepth(node.right);
+  
+            /* use the larger one */
+            if (lDepth > rDepth)
+                return (lDepth + 1);
+             else
+                return (rDepth + 1);
+        }
+    }
+      
+
+23. How can you run one thread and then another only after the first thread has completed?
+java.lang.Thread class provides the join() method which allows one thread to wait until another thread completes its execution. If t is a Thread object whose thread is currently executing, then t.join(); it causes the current thread to pause its execution until thread it join completes its execution.
+
+
+
+24. What’s the difference between a thread sleep() and wait()? 
+	sleep() is a method which is used to hold the process for few seconds or the time you wanted but in case of wait() method thread goes in waiting state and it won’t come back automatically until we call the notify() or notifyAll().
+
+	The major difference is that wait() releases the lock or monitor while sleep() doesn’t releases any lock or monitor while waiting. Wait is used for inter-thread communication while sleep is used to introduce pause on execution, generally.
+
+	Thread.sleep() sends the current thread into the “Not Runnable” state for some amount of time. The thread keeps the monitors it has acquired — i.e. if the thread is currently in a synchronized block or method no other thread can enter this block or method. If another thread calls t.interrupt() it will wake up the sleeping thread. Note that sleep is a static method, which means that it always affects the current thread (the one that is executing the sleep method). A common mistake is to call t.sleep() where t is a different thread; even then, it is the current thread that will sleep, not the t thread.
+
+	object.wait() sends the current thread into the “Not Runnable” state, like sleep(), but with a twist. Wait is called on an object, not a thread; we call this object the “lock object.” Before lock.wait() is called, the current thread must synchronize on the lock object; wait() then releases this lock, and adds the thread to the “wait list” associated with the lock. Later, another thread can synchronize on the same lock object and call lock.notify(). This wakes up the original, waiting thread. Basically, wait()/notify() is like sleep()/interrupt(), only the active thread does not need a direct pointer to the sleeping thread, but only to the shared lock object.
+
+
+25. What about suspend(), resume()?
+	public void suspend()
+	This method puts a thread in the suspended state and can be resumed using resume() method.
+
+	public void resume()
+	This method resumes a thread, which was suspended using suspend() method.
+
+
+26. Write a function that traverses an array and checks the sum to the left of the index with the sum to the write of the index, and returns the index position when the left summation equals the right. Can you optimize your solution further?
+
+Method 1 (Simple)
+Consider every element starting from second element. Compute sum of elements on its left and sum of elements on its right. If these two sums are same, return the element.
+
+Method 2 (Using Prefix and Suffx Arrays :
+
+We form a prefix and suffix sum arrays
+Given array : 1 4 2 5
+Prefix Sum :  1  5 7 12
+Suffix Sum :  12 11 7 5
+
+Now, we will traverse both prefix arrays.
+The index at which they yield equal result,
+is the index where the array is partitioned 
+with equal sum.
+
+Method 3 (Space efficient)
+We calculate the sum of the whole array except the first element in right_sum, considering it to be the partitioning element. Now, we traverse the array from left to right, subtracting an element from right_sum and adding an element to left_sum. The point where right_sum equals left_sum, we get the partition.
+ 
+https://www.geeksforgeeks.org/find-element-array-sum-left-array-equal-sum-right-array/  (for code)
+
+
+
+
+27. An excel sheet has different rows and columns. For example, for column A, row number is 0. For column Z, row number is 25. After column Z, it again starts like AA, AB, AC...Write program to get the column name based on a number. The method should take any number and return the column name corresponding to that column. 
+
+
+private static void printString(int columnNumber)
+    {
+        // To store result (Excel column name)
+        StringBuilder columnName = new StringBuilder();
+ 
+        while (columnNumber > 0)
+        {
+            // Find remainder
+            int rem = columnNumber % 26;
+ 
+            // If remainder is 0, then a 
+            // 'Z' must be there in output
+            if (rem == 0)
+            {
+                columnName.append("Z");
+                columnNumber = (columnNumber / 26) - 1;
+            }
+            else // If remainder is non-zero
+            {
+                columnName.append((char)((rem - 1) + 'A'));
+                columnNumber = columnNumber / 26;
+            }
+        }
+ 
+        // Reverse the string and print result
+        System.out.println(columnName.reverse());
+    }
+
+
+
+28. You have an array of int with different numbers. You have to sort it in a way that the all the even numbers should come in the starting and odd numbers in the end. You cannot use a temp array or extra array in your solution. 
+
+ static void segregateEvenOdd(int arr[])
+    {
+        /* Initialize left and right indexes */
+        int left = 0, right = arr.length - 1;
+        while (left < right)
+        {
+            /* Increment left index while we see 0 at left */
+            while (arr[left]%2 == 0 && left < right)
+                left++;
+ 
+            /* Decrement right index while we see 1 at right */
+            while (arr[right]%2 == 1 && left < right)
+                right--;
+ 
+            if (left < right)
+            {
+                /* Swap arr[left] and arr[right]*/
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
  
